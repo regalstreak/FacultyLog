@@ -1,0 +1,46 @@
+/* Global variables */
+
+// Screen: Desktops - 1281px to higher resolution desktops
+/* Media Queries (named according to nearest hundred of min-width) */
+$12xl = 'only screen and (min-width: 1281px)';
+// Screen: Laptops and Desktops B/w 1025px to 1280px
+$10lg = 'only screen and (min-width: 1025px) and (max-width: 1280px)';
+// Screen: Tablets and iPads (portrait) B/w 768px to 1024px
+$7md = 'only screen and (min-width: 768px) and (max-width: 1024px)';
+// Screen: Tablets and iPads (landscape) B/w 768px to 1024px
+$7lmd = 'only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape)';
+// Screen: Low Resolution Tablets, Mobiles (Landscape) B/w 481px to 767px
+$4sm = 'only screen and (min-width: 481px) and (max-width: 767px)';
+// Screen: Most of the Smartphones Mobiles (Portrait) B/w 320px to 479px
+$3xs = 'only screen and (min-width: 320px) and (max-width: 480px)';
+
+// Font
+$font-family = 'Montserrat', sans-serif;
+$font-size-large = 3.5rem;
+$font-size-medium = 2.5rem;
+$font-size-small = 1.5rem;
+
+header() {
+    font-weight: 700;
+    font-size: $font-size-large;
+    color: $qubexo-black;
+}
+
+small($small-color = $qubexo-black) {
+    font-weight: 400;
+    font-size: $font-size-small;
+    color: $small-color;
+}
+
+// Colors
+$rait-red = #9F1C32;
+$rait-white = #f6feff;
+
+// Mixins
+selectDisable($pointer-events = none) {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
