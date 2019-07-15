@@ -39,7 +39,8 @@
             <v-tabs-slider color="primary"></v-tabs-slider>
             <v-tab v-for="n in 3" :key="n">Item {{ n }}</v-tab>
           </v-tabs>
-          <enter-timetable></enter-timetable>
+
+          <view-timetable />
 
           <v-layout>
             <v-flex xs12 class="text-xs-right">
@@ -57,6 +58,7 @@
 <script>
 import SelectOptions from "../../components/timetable-coordinator/SelectMainOptions";
 import EnterTimetable from "../../components/timetable-coordinator/EnterTimetable";
+import ViewTimetable from "../../components/principal/ViewTimetable";
 
 export default {
   data() {
@@ -66,7 +68,8 @@ export default {
   },
   components: {
     SelectOptions,
-    EnterTimetable
+    EnterTimetable,
+    ViewTimetable
   }
 };
 </script>
