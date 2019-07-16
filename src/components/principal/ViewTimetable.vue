@@ -1,5 +1,6 @@
 <template>
   <v-card>
+    {{ info }}
     <v-card-title>
       Nutrition
       <v-spacer></v-spacer>
@@ -53,14 +54,25 @@
 </template>
 
 <script>
+// import axios from "axios";
 import SubjectBlock from "./SubjectBlock";
+import { test } from "../../api/API";
 
 export default {
   components: {
     SubjectBlock
   },
+  mounted() {
+    // axios
+    //   // .get("http://192.168.43.208:8000/")
+    //   .then(response => console.log(response))
+    //   .catch(err => console.log(err));
+
+    test().then(res => console.log(res));
+  },
   data() {
     return {
+      info: "asdjasdbhasjdasbhd",
       search: "",
       headers: [
         {

@@ -19,6 +19,6 @@ export default {
 <style lang="stylus" scoped>
 .subject-card {
     margin: 12px;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 </style>

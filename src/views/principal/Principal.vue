@@ -57,7 +57,6 @@
 
 <script>
 import SelectOptions from "../../components/timetable-coordinator/SelectMainOptions";
-import EnterTimetable from "../../components/timetable-coordinator/EnterTimetable";
 import ViewTimetable from "../../components/principal/ViewTimetable";
 
 export default {
@@ -68,7 +67,6 @@ export default {
   },
   components: {
     SelectOptions,
-    EnterTimetable,
     ViewTimetable
   }
 };
