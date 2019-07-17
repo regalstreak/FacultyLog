@@ -104,10 +104,15 @@ export default {
     ...mapState(["mainOptions"]),
     year() {
       const vm = this;
-      if (vm.departmentSelect == "Engineering Science") {
+      // if (vm.departmentSelect == "Engineering Science") {
+      if (vm.departmentSelect == "FE") {
         vm.yearSelect = "FE";
         return ["FE"];
       } else {
+        this.$store.commit("changeMainOptions", {
+          type: "year",
+          option: "SE"
+        });
         vm.yearSelect = "SE";
         return ["SE", "TE", "BE"];
       }
@@ -120,9 +125,16 @@ export default {
         .then(res => {
           let nameDepartments = [];
           res.forEach(element => {
-            nameDepartments.push(element.name);
+            // nameDepartments.push(element.name);
+            nameDepartments.push(element.short);
           });
           vm.departmentSelect = nameDepartments[0];
+
+          this.$store.commit("changeMainOptions", {
+            type: "department",
+            option: nameDepartments[0]
+          });
+
           return nameDepartments;
         })
         .catch(err => {

@@ -33,15 +33,35 @@ export const getDepartments = (college) => {
         })
 }
 
-export const getTimetable = (college, department, year) => {
+export const getTimetable = (college, department, year, division = "A") => {
     console.log("timtable getting");
     return axios.post(Constants.BASE_URL + "timetable_view_class", {
-        "department": department,
-        "college": college,
-        "year": year
+        params: {
+            department: department,
+            year: year,
+            division: division
+        },
+        college: college
     })
         .then((res) => {
-            console.log(res);
+            // console.log(res);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+export const addTimetable = (request, division = "A", college) => {
+    console.log("timtable getting");
+    return axios.post(Constants.BASE_URL + "timetable_enter", {
+        params: {
+            division: division,
+            ...request
+        },
+        college: college
+    })
+        .then((res) => {
+            // console.log(res);
             return res.data;
         })
         .catch((err) => {

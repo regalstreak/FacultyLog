@@ -27,7 +27,7 @@
 
           <v-layout>
             <v-flex xs12 class="text-xs-right">
-              <v-btn color="primary" @click="selectMainOptions()">Next</v-btn>
+              <v-btn color="primary" @click="getOurTimetable()">Next</v-btn>
             </v-flex>
           </v-layout>
         </v-stepper-content>
@@ -35,11 +35,7 @@
         <v-stepper-content step="2">
           <!-- <v-card class="mb-5" color="grey lighten-1" height="200px"></v-card> -->
 
-          <v-tabs grow >
-            <v-tabs-slider color="primary"></v-tabs-slider>
-            <v-tab v-for="n in 3" :key="n">Item {{ n }}</v-tab>
-          </v-tabs>
-          <enter-timetable></enter-timetable>
+          <enter-timetable :timetable="timetableParent"></enter-timetable>
 
           <v-layout>
             <v-flex xs12 class="text-xs-right">
@@ -57,19 +53,34 @@
 <script>
 import SelectOptions from "../../components/timetable-coordinator/SelectMainOptions";
 import EnterTimetable from "../../components/timetable-coordinator/EnterTimetable";
+import { mapState } from "vuex";
+import { getTimetable } from "../../api/API";
 
 export default {
   data() {
     return {
-      e1: 0
+      e1: 0,
+      timetableParent: []
     };
   },
   components: {
     SelectOptions,
     EnterTimetable
   },
+  computed: {
+    ...mapState(["mainOptions"])
+  },
   methods: {
-    selectMainOptions() {
+    getOurTimetable() {
+      console.log(this.mainOptions.department);
+      getTimetable(
+        this.mainOptions.college,
+        this.mainOptions.department,
+        this.mainOptions.year
+      ).then(res => {
+        this.timetableParent = res;
+        console.log(res);
+      });
       this.e1 = 2;
     }
   }
