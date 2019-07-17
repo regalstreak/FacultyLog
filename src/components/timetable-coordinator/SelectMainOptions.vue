@@ -7,6 +7,7 @@
           <v-flex>
             <v-combobox
               v-model="university.selected"
+              @input="changeOption($event ,'university')"
               :items="university.items"
               prepend-icon="location_city"
               prefix="University: "
@@ -15,6 +16,7 @@
           <v-flex>
             <v-combobox
               v-model="college.selected"
+              @input="changeOption($event ,'college')"
               :items="college.items"
               prepend-icon="account_balance"
               prefix="College: "
@@ -23,6 +25,7 @@
           <v-flex>
             <v-combobox
               v-model="departmentSelect"
+              @input="changeOption($event ,'department')"
               :items="department"
               prepend-icon="school"
               prefix="Department: "
@@ -31,6 +34,7 @@
           <v-flex>
             <v-combobox
               v-model="yearSelect"
+              @input="changeOption($event ,'year')"
               :items="year"
               prepend-icon="calendar_today"
               prefix="Year: "
@@ -47,6 +51,7 @@
 
 <script>
 import { getDepartments } from "../../api/API";
+import { mapState } from "vuex";
 
 export default {
   mounted() {},
@@ -64,7 +69,39 @@ export default {
       yearSelect: "FE"
     };
   },
+
+  methods: {
+    changeOption($event, type) {
+      switch (type) {
+        case "year": {
+          this.yearSelect = $event;
+          break;
+        }
+        case "university": {
+          this.university.selected = $event;
+          break;
+        }
+        case "department": {
+          this.departmentSelect = $event;
+          break;
+        }
+        case "college": {
+          this.college.selected = $event;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+
+      this.$store.commit("changeMainOptions", {
+        type: type,
+        option: $event
+      });
+    }
+  },
   computed: {
+    ...mapState(["mainOptions"]),
     year() {
       const vm = this;
       if (vm.departmentSelect == "Engineering Science") {
@@ -82,7 +119,7 @@ export default {
       return await getDepartments(vm.college.select)
         .then(res => {
           let nameDepartments = [];
-          res.data.forEach(element => {
+          res.forEach(element => {
             nameDepartments.push(element.name);
           });
           vm.departmentSelect = nameDepartments[0];

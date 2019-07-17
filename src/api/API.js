@@ -11,7 +11,7 @@ export const test = () => {
     return axios.get(Constants.BASE_URL)
         .then(response => {
             console.log(response)
-            return response;
+            return response.data;
         })
         .catch(error => {
             console.error(error);
@@ -25,10 +25,26 @@ export const getDepartments = (college) => {
         college: college
     })
         .then(response => {
-            return response;
+            return response.data;
         })
         .catch(error => {
             console.error(error);
             return error;
         })
+}
+
+export const getTimetable = (college, department, year) => {
+    console.log("timtable getting");
+    return axios.post(Constants.BASE_URL + "timetable_view_class", {
+        "department": department,
+        "college": college,
+        "year": year
+    })
+        .then((res) => {
+            console.log(res);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }

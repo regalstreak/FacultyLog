@@ -5,10 +5,34 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    mainOptions: {
+      university: "D. Y. Patil University",
+      college: "RAIT",
+      department: "",
+      year: "FE"
+    }
   },
   mutations: {
+    changeMainOptions(state, payload) {
+      switch (payload.type) {
+        case "university": {
+          state.mainOptions.university = payload.option;
+          break;
+        } case "college": {
+          state.mainOptions.college = payload.option;
+          break;
+        } case "department": {
+          state.mainOptions.department = payload.option;
+          break;
+        } case "year": {
+          state.mainOptions.year = payload.option;
+          break;
+        } default: {
+          break;
+        }
+      }
 
+    }
   },
   actions: {
 

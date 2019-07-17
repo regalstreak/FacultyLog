@@ -27,7 +27,7 @@
 
           <v-layout>
             <v-flex xs12 class="text-xs-right">
-              <v-btn color="primary" @click="e1 = 2">Next</v-btn>
+              <v-btn color="primary" @click="selectMainOptions()">Next</v-btn>
             </v-flex>
           </v-layout>
         </v-stepper-content>
@@ -67,6 +67,11 @@ export default {
   components: {
     SelectOptions,
     EnterTimetable
+  },
+  methods: {
+    selectMainOptions() {
+      this.e1 = 2;
+    }
   }
 };
 </script>
