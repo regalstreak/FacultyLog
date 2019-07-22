@@ -51,6 +51,24 @@ export const getTimetable = (college, department, year, division = "A") => {
             console.log(err);
         });
 }
+export const getFacultyInfo = (college, department, year) => {
+    console.log("getting faculty info");
+    return axios.post(Constants.BASE_URL + "faculty_info", {
+        params: {
+            department: department,
+            year: year,
+        },
+        college: college
+    })
+        .then((res) => {
+            // console.log(res);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
 export const addTimetable = (request, division = "A", college) => {
     console.log("timtable getting");
     return axios.post(Constants.BASE_URL + "timetable_enter", {

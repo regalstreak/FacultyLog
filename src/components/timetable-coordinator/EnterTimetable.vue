@@ -28,7 +28,7 @@
                 <v-combobox
                   v-model="selectOptions.subject"
                   :items="items"
-                  prepend-icon="school"
+                  prepend-icon="subject"
                   prefix="Subject: "
                 ></v-combobox>
               </v-flex>
@@ -177,6 +177,8 @@ export default {
         this.divisions[this.tab],
         this.mainOptions.college
       ).then(res => console.log(res));
+
+      this.getOurTimetable();
     },
     getOurTimetable() {
       this.ourTimetable = [];
@@ -210,3 +212,5 @@ export default {
   background: grey;
 }
 </style>
+
+koli gay af

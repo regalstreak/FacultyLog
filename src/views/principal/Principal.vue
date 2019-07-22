@@ -1,7 +1,7 @@
 <template>
   <v-card class="card--flex-toolbar">
     <v-toolbar dark color="secondary darken-1" card prominent>
-      <v-toolbar-title>Timetable</v-toolbar-title>
+      <v-toolbar-title>Principal</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>search</v-icon>
@@ -14,7 +14,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 2" step="2">Enter Timetable</v-stepper-step>
+        <v-stepper-step :complete="e1 > 2" step="2">View Timetable</v-stepper-step>
 
         <v-divider></v-divider>
       </v-stepper-header>
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import SelectOptions from "../../components/timetable-coordinator/SelectMainOptions";
+import SelectOptions from "../../components/principal/SelectOptionsPrincipal";
 import ViewTimetable from "../../components/principal/ViewTimetable";
 
 export default {

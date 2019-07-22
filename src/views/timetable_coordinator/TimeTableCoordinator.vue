@@ -54,7 +54,7 @@
 import SelectOptions from "../../components/timetable-coordinator/SelectMainOptions";
 import EnterTimetable from "../../components/timetable-coordinator/EnterTimetable";
 import { mapState } from "vuex";
-import { getTimetable } from "../../api/API";
+import { getTimetable, getFacultyInfo } from "../../api/API";
 
 export default {
   data() {
@@ -82,6 +82,16 @@ export default {
         console.log(res);
       });
       this.e1 = 2;
+
+      getFacultyInfo(
+        this.mainOptions.college,
+        this.mainOptions.department,
+        this.mainOptions.year
+      )
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => console.log(err));
     }
   }
 };

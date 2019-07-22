@@ -1,5 +1,5 @@
 <template>
-<v-card class="subject-card">
+<v-card flat class="subject-card">
     <v-card-text>
         Sybject
         <br>
