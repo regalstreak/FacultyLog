@@ -152,3 +152,10 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+td {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+</style>

@@ -35,7 +35,7 @@
         <v-stepper-content step="2">
           <!-- <v-card class="mb-5" color="grey lighten-1" height="200px"></v-card> -->
 
-          <enter-timetable :timetable="timetableParent"></enter-timetable>
+          <enter-timetable :timetable="timetableParent" :faculty="facultyInfo"></enter-timetable>
 
           <v-layout>
             <v-flex xs12 class="text-xs-right">
@@ -60,6 +60,7 @@ export default {
   data() {
     return {
       e1: 0,
+      facultyInfo: [],
       timetableParent: []
     };
   },
@@ -90,6 +91,7 @@ export default {
       )
         .then(res => {
           console.log(res);
+          this.facultyInfo = res;
         })
         .catch(err => console.log(err));
     }
