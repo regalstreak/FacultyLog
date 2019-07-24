@@ -51,6 +51,42 @@ export const getTimetable = (college, department, year, division = "A") => {
             console.log(err);
         });
 }
+
+
+
+
+
+
+export const getPrincipalTimetable = (college, department, year, division = "A") => {
+    console.log("principal timtable getting");
+    return axios.post(Constants.BASE_URL + "test", {
+        params: {
+            department: department,
+            year: year,
+            division: division
+        },
+        college: college
+    })
+        .then((res) => {
+            console.log(res);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+
+
+
+
+
+
+
+
+
+
+
 export const getFacultyInfo = (college, department, year) => {
     console.log("getting faculty info");
     return axios.post(Constants.BASE_URL + "faculty_info", {
@@ -75,6 +111,22 @@ export const addTimetable = (request, division = "A", college) => {
         params: {
             division: division,
             ...request
+        },
+        college: college
+    })
+        .then((res) => {
+            // console.log(res);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+export const deleteTimetable = (college, srno) => {
+    return axios.post(Constants.BASE_URL + "timetable_record_delete", {
+        params: {
+            srno: srno
         },
         college: college
     })

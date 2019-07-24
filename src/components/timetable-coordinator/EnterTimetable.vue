@@ -38,6 +38,7 @@
                   :items="ourFaculty"
                   prepend-icon="person"
                   prefix="Teacher: "
+                  @change="getSdrn(selectOptions.teacher)"
                 ></v-combobox>
               </v-flex>
               <v-flex>
@@ -45,14 +46,20 @@
                   <v-flex md6>
                     <v-combobox
                       v-model="selectOptions.start_time"
+                      :items="times"
+                      prepend-icon="access_time"
+                      prefix="Start time: "
+                    ></v-combobox>
+                    <!-- <v-combobox
+                      v-model="selectOptions.start_time"
                       :items="items"
                       prepend-icon="access_time"
                       prefix="Start time: "
                       readonly
                       @click="startTimeMenu = !startTimeMenu"
-                    ></v-combobox>
+                    ></v-combobox>-->
 
-                    <v-time-picker
+                    <!-- <v-time-picker
                       style="position: absolute; opacity: 1; z-index: 100; width: 290px"
                       v-if="startTimeMenu"
                       v-model="selectOptions.start_time"
@@ -63,7 +70,7 @@
                       >
                         <v-btn @click="startTimeMenu = !startTimeMenu" color="primary" round>OK</v-btn>
                       </div>
-                    </v-time-picker>
+                    </v-time-picker>-->
                     <!-- 
                     <v-menu
                       ref="startTimeRef"
@@ -98,6 +105,12 @@
                   <v-flex md6>
                     <v-combobox
                       v-model="selectOptions.end_time"
+                      :items="times"
+                      prepend-icon="alarm"
+                      prefix="End time: "
+                    ></v-combobox>
+                    <!-- <v-combobox
+                      v-model="selectOptions.end_time"
                       prepend-icon="alarm"
                       prefix="End time: "
                       readonly
@@ -115,7 +128,7 @@
                       >
                         <v-btn @click="endTimeMenu = !endTimeMenu" color="primary" round>OK</v-btn>
                       </div>
-                    </v-time-picker>
+                    </v-time-picker> -->
 
                     <!-- <v-menu
                       ref="endTimeRef"
@@ -162,7 +175,7 @@
               </v-flex>
               <v-flex>
                 <v-combobox
-                  v-model="selectOptions.batches"
+                  v-model="selectOptions.batch"
                   :items="batches"
                   prepend-icon="exposure_plus_1"
                   prefix="Batches: "
@@ -189,7 +202,14 @@
               <v-container style="max-height: 400px" class="scroll-y">
                 <v-card v-for="(x, index) in ourTimetable" class="timetable-card" :key="index">
                   <v-card-title>
-                    <div class="headline">{{x.day}} - {{x.subject}}</div>
+                    <div class="subject_container">
+                      <div class="headline">{{x.day}} - {{x.subject}}</div>
+                      <div class="delete_button">
+                        <v-btn color="primary" fab small @click="deleteRecord(x.srno)">
+                          <v-icon dark>remove</v-icon>
+                        </v-btn>
+                      </div>
+                    </div>
                   </v-card-title>
                   <v-card-text>
                     <v-layout column>
@@ -210,9 +230,8 @@
 </template>
 
 <script>
-import { getTimetable } from "../../api/API";
+import { getTimetable, addTimetable, deleteTimetable } from "../../api/API";
 import { mapState } from "vuex";
-import { addTimetable } from "../../api/API";
 
 export default {
   data() {
@@ -225,13 +244,27 @@ export default {
       "Saturday"
     ];
 
+    const times = [
+      "08:30:00",
+      "09:30:00",
+      "10:30:00",
+      "11:30:00",
+      "12:30:00",
+      "13:30:00",
+      "14:30:00",
+      "15:30:00",
+      "16:30:00",
+      "17:30:00",
+      "18:30:00"
+    ];
+
     return {
       select: "Programming",
       items: ["Programming", "Design", "Vue", "Vuetify"],
-
+      times: times,
       days: days,
 
-      classRooms: [514, 242, 242],
+      classRooms: [514, 242, 511],
 
       startTimeMenu: false,
 
@@ -245,13 +278,13 @@ export default {
 
       selectOptions: {
         day: days[0],
-      end_time: null,
-      start_time: null,
+        end_time: null,
+        start_time: null,
         subject: "Select",
         teacher: "Select",
-        sdrn: 123,
+        sdrn: 0,
         // classroom: "514",
-        room: "514",
+        room: "511",
         batch: "All"
       },
 
@@ -270,7 +303,7 @@ export default {
         this.divisions[this.tab] + "1",
         this.divisions[this.tab] + "2",
         this.divisions[this.tab] + "3",
-        this.divisions[this.tab] + "4",
+        this.divisions[this.tab] + "4"
       ];
       return ourArray;
     },
@@ -295,7 +328,11 @@ export default {
     },
     ourFaculty() {
       if (this.faculty.faculty) {
-        return this.faculty.faculty;
+        let abc = [];
+        this.faculty.faculty.forEach(element => {
+          abc.push(element.name);
+        });
+        return abc;
       } else {
         return ["error", "in", "getting", "data"];
       }
@@ -329,6 +366,22 @@ export default {
         this.ourTimetable = res;
         console.log(res);
       });
+    },
+    getSdrn(teacherName) {
+      let abc = this.faculty.faculty.find(function(element) {
+        return element.name == teacherName;
+      });
+      this.selectOptions.sdrn = abc.sdrn.toString();
+    },
+    deleteRecord(srno) {
+      console.log("deleting ", srno);
+      deleteTimetable(this.mainOptions.college, srno).catch(err =>
+        console.log(err)
+      );
+
+      this.ourTimetable = [];
+
+      this.getOurTimetable();
     }
   }
 };
@@ -349,6 +402,16 @@ export default {
   margin: 0 75%;
   background: grey;
 }
-</style>
 
-koli gay af
+.subject_container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+}
+
+.delete_button {
+  position: absolute;
+  right: 0;
+}
+</style>
