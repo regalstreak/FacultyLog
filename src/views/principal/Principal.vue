@@ -36,7 +36,7 @@
           <!-- <v-card class="mb-5" color="grey lighten-1" height="200px"></v-card> -->
 
 
-          <view-timetable :principalTimetable="parentPrincipalTimetable" />
+          <view-timetable :parentPrincipalTimetable="parentPrincipalTimetable" />
 
           <v-layout>
             <v-flex xs12 class="text-xs-right">

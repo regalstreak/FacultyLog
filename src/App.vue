@@ -21,7 +21,7 @@
         </v-flex>
       </v-layout>
     </v-card>
-    <v-card flat v-else>
+    <div v-else>
       <v-toolbar style="height: 10rem" color="primary" extended flat></v-toolbar>
 
       <v-layout row pb-2>
@@ -31,7 +31,7 @@
           </v-content>
         </v-flex>
       </v-layout>
-    </v-card>
+    </div>
   </v-app>
 </template>
 
@@ -40,8 +40,12 @@ export default {
   name: "App",
   data() {
     return {
-      abc: false
     };
+  },
+  computed: {
+    abc() {
+      return false;
+    }
   }
 };
 </script>

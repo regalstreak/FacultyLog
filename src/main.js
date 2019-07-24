@@ -7,6 +7,9 @@ import './registerServiceWorker'
 import AsyncComputed from 'vue-async-computed'
 
 import Vuex from 'vuex'
+import vuetify from './plugins/vuetify';
+import 'roboto-fontface/css/roboto/roboto-fontface.css'
+import '@mdi/font/css/materialdesignicons.css'
 Vue.use(Vuex)
 
 Vue.config.productionTip = false
@@ -16,6 +19,7 @@ Vue.use(AsyncComputed)
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
 

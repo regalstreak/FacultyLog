@@ -1,18 +1,23 @@
 <template>
 <v-card flat class="subject-card">
-    <v-card-text>
-        Sybject
+    <v-card-text v-if="subject">
+        {{ subject.subject }}
         <br>
-        TEacher
         <br>
-        Room
+        {{ subject.faculty }}
+        <br>
+        <br>
+        {{ subject.class }}
+    </v-card-text>
+    <v-card-text v-else>
+        none
     </v-card-text>
 </v-card>
 </template>
 
 <script>
 export default {
-
+    props:["subject"]
 }
 </script>
 

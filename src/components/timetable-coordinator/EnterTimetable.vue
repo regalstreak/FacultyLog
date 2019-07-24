@@ -1,5 +1,5 @@
 <template>
-  <v-container style="padding-bottom: 10rem">
+  <v-container >
     <!-- <v-tabs v-model="tab" class="tabs" grow>
       <v-tabs-slider color="primary"></v-tabs-slider>
       <v-tab v-for="n in 3" :key="n">Item {{ n }}</v-tab>
@@ -128,7 +128,7 @@
                       >
                         <v-btn @click="endTimeMenu = !endTimeMenu" color="primary" round>OK</v-btn>
                       </div>
-                    </v-time-picker> -->
+                    </v-time-picker>-->
 
                     <!-- <v-menu
                       ref="endTimeRef"
@@ -199,7 +199,7 @@
           <v-flex md6 xs12>
             <div class="headline">Timetable</div>
             <div>
-              <v-container style="max-height: 400px" class="scroll-y">
+              <v-container style="max-height: 400px" class="overflow-y-auto">
                 <v-card v-for="(x, index) in ourTimetable" class="timetable-card" :key="index">
                   <v-card-title>
                     <div class="subject_container">

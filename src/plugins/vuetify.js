@@ -1,15 +1,10 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
-import 'vuetify/src/stylus/app.styl'
-import 'vuetify/dist/vuetify.css';
-// import colors from 'vuetify/es5/util/colors'
+import Vue from 'vue';
+import Vuetify from 'vuetify/lib';
 
-Vue.use(Vuetify, {
-  theme: {
-    primary: '#9F1C32',
+Vue.use(Vuetify);
+
+export default new Vuetify({
+  icons: {
+    iconfont: 'mdi',
   },
-  options: {
-    customProperties: true
-  },
-  iconfont: 'md',
-})
+});
