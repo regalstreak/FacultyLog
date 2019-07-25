@@ -1,5 +1,5 @@
 <template>
-  <v-container >
+  <v-container>
     <!-- <v-tabs v-model="tab" class="tabs" grow>
       <v-tabs-slider color="primary"></v-tabs-slider>
       <v-tab v-for="n in 3" :key="n">Item {{ n }}</v-tab>
@@ -341,6 +341,7 @@ export default {
   props: ["timetable", "faculty"],
 
   methods: {
+
     addCard() {
       // this.noOfCards++;
       addTimetable(

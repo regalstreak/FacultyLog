@@ -52,6 +52,23 @@ export const getTimetable = (college, department, year, division = "A") => {
         });
 }
 
+export const getCompleteTimetable = (college, request) => {
+    console.log("timtable getting");
+    return axios.post(Constants.BASE_URL + "timetable_view_class", {
+        params: {
+            ...request
+        },
+        college: college
+    })
+        .then((res) => {
+            // console.log(res);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
 
 
 
@@ -94,6 +111,20 @@ export const getFacultyInfo = (college, department, year) => {
             department: department,
             year: year,
         },
+        college: college
+    })
+        .then((res) => {
+            // console.log(res);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+export const getAllFacultyInfo = (college) => {
+    console.log("getting all faculty info");
+    return axios.post(Constants.BASE_URL + "all_faculty_info", {
         college: college
     })
         .then((res) => {

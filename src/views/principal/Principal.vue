@@ -1,6 +1,6 @@
 <template>
   <v-card class="card--flex-toolbar">
-    <v-toolbar dark color="secondary darken-1" card prominent>
+    <v-toolbar dark color="secondary darken-1" >
       <v-toolbar-title>Principal</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
