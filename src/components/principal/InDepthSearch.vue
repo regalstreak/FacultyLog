@@ -282,6 +282,8 @@ export default {
         this.ourTimetable = res;
         console.log(res);
       });
+      this.selectOptions.sdrn = "";
+       
     }
   }
 };

@@ -10,15 +10,14 @@
       <v-tab-item v-for="(division) in divisions" :key="division">
         <v-card>
           <v-card-title>
-            Nutrition
             <v-spacer></v-spacer>
-            <v-text-field
+            <!-- <v-text-field
               v-model="search"
               append-icon="search"
               label="Search"
               single-line
               hide-details
-            ></v-text-field>
+            ></v-text-field> -->
           </v-card-title>
           <v-data-table
             :headers="headers"

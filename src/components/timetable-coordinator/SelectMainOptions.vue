@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <img class="selectDisable options_image" src="@/assets/ttc/enter_timetable.svg" alt />
+    <!-- <img class="selectDisable options_image" src="@/assets/ttc/enter_timetable.svg" alt /> -->
     <v-layout>
       <v-flex xs5>
         <v-layout column>
