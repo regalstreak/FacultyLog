@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout wrap>
-      <v-flex md5 xs12>
+      <v-flex md3 xs12>
         <v-layout column>
           <v-flex>
             <!-- @input="changeOption($event ,'college')" -->
@@ -36,14 +36,14 @@
               prefix="Division: "
             ></v-combobox>
           </v-flex>
-          <v-flex>
+          <!-- <v-flex>
             <v-combobox
               v-model="selectOptions.day"
               :items="days"
               prepend-icon="today"
               prefix="Day: "
             ></v-combobox>
-          </v-flex>
+          </v-flex> -->
           <!-- <v-flex>
             <v-combobox
               v-model="selectOptions.subject"
@@ -51,7 +51,7 @@
               prepend-icon="subject"
               prefix="Subject: "
             ></v-combobox>
-          </v-flex> -->
+          </v-flex>-->
           <v-flex>
             <!-- <v-combobox
               v-model="selectOptions.teacher"
@@ -64,7 +64,14 @@
               :items="ourFaculty"
               prepend-icon="person"
               prefix="Teacher: "
-              @change="getSdrn(teacherSelect)"
+            ></v-combobox>
+          </v-flex>
+          <v-flex>
+            <v-combobox
+              v-model="selectOptions.time"
+              :items="times"
+              prepend-icon="alarm"
+              prefix="Time: "
             ></v-combobox>
           </v-flex>
           <!-- <v-flex>
@@ -92,7 +99,7 @@
           <v-flex>
             <v-combobox
               v-model="selectOptions.room"
-              :items="items"
+              :items="classrooms"
               prepend-icon="meeting_room"
               prefix="Classroom: "
             ></v-combobox>
@@ -120,10 +127,12 @@
       <v-flex md1 xs12>
         <v-divider class="card-divider" inset vertical></v-divider>
       </v-flex>
-      <v-flex md6 xs12>
+      <v-flex md8 xs12>
         <div class="headline">Timetable</div>
         <div>
-          <v-container style="max-height: 400px" class="overflow-y-auto">
+          <InDepthView :timetable="ourTimetable"></InDepthView>
+
+          <!-- OURMAINBOI <v-container style="max-height: 400px" class="overflow-y-auto">
             <v-card v-for="(x, index) in ourTimetable" class="timetable-card" :key="index">
               <v-card-title>
                 <div class="headline">{{x.day}} - {{x.sdrn}} - {{x.subject}}</div>
@@ -141,7 +150,7 @@
                 </v-layout>
               </v-card-text>
             </v-card>
-          </v-container>
+          </v-container>-->
         </div>
       </v-flex>
     </v-layout>
@@ -149,11 +158,14 @@
 </template>
 
 <script>
-import { getCompleteTimetable } from "../../api/API";
+import { getAllFacultyInfo, getCompleteFacultyTimetable } from "../../api/API";
 import { mapState } from "vuex";
-import { getAllFacultyInfo } from "../../api/API";
+import InDepthView from "./InDepthView";
 
 export default {
+  components: {
+    InDepthView
+  },
   data() {
     const days = [
       "Monday",
@@ -164,6 +176,20 @@ export default {
       "Saturday"
     ];
 
+    const times = [
+      "08:30:00",
+      "09:30:00",
+      "10:30:00",
+      "11:30:00",
+      "12:30:00",
+      "13:30:00",
+      "14:30:00",
+      "15:30:00",
+      "16:30:00",
+      "17:30:00",
+      "18:30:00"
+    ];
+
     return {
       departments: ["COMPS", "EXTC", "ETRX", "EXTC", "IT", "FE", "INSTRU"],
       year: ["FE", "SE", "TE", "BE"],
@@ -172,6 +198,10 @@ export default {
       college: ["RAIT"],
       teacherSelect: "",
 
+      times: times,
+
+      classrooms: [511, 514, 504],
+
       select: "Programming",
       items: ["Programming", "Design", "Vue", "Vuetify"],
       collegeSelect: "RAIT",
@@ -179,7 +209,8 @@ export default {
         department: "",
         division: "",
         year: "",
-        day: "",
+        day: "",  
+        time: "",
         // subject: "",
         sdrn: "",
         // start_time: "",
@@ -240,12 +271,21 @@ export default {
   props: ["timetable"],
 
   methods: {
-    getSdrn(teacherName) {
-      let abc = this.allFacultyInfo.faculty.find(function(element) {
-        return element.name == teacherName;
-      });
-      if (abc) {
-        this.selectOptions.sdrn = abc.sdrn.toString();
+    getSdrn() {
+      this.selectOptions.sdrn = "";
+      const teacher = this.teacherSelect;
+      if (teacher == "") {
+        this.selectOptions.sdrn = "";
+      } else {
+        let abc = this.allFacultyInfo.faculty.find(function(element) {
+          return element.name == teacher;
+        });
+        console.log("ABCCCCCCCCCCCCC" + " " + JSON.stringify(abc));
+        if (abc) {
+          this.selectOptions.sdrn = abc.sdrn.toString();
+        } else {
+          this.selectOptions.sdrn = "";
+        }
       }
     },
     changeOption($event, type) {
@@ -277,13 +317,14 @@ export default {
       });
     },
     depthSearch() {
+      this.getSdrn();
       this.ourTimetable = [];
-      getCompleteTimetable("RAIT", { ...this.selectOptions }).then(res => {
-        this.ourTimetable = res;
-        console.log(res);
-      });
-      this.selectOptions.sdrn = "";
-       
+      getCompleteFacultyTimetable("RAIT", { ...this.selectOptions }).then(
+        res => {
+          this.ourTimetable = res;
+          console.log(res);
+        }
+      );
     }
   }
 };

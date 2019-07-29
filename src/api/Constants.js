@@ -12,3 +12,45 @@ const Constants = {
 }
 
 export default Constants;
+
+
+/*
+  let abc = {
+    "08:30:00-09:30:00": {
+        "subject": "DWM",
+        "class": 511,
+        "faculty": "Arpita Palchoudhury",
+        "type": "all"
+    },
+    "09:30:00-10:30:00": {
+        "type": "pracs",
+        "info": [
+            {
+                "subject": "DWM",
+                "class": 531,
+                "faculty": "Arasdaspita Palchoudhury",
+                "batch": "A1"
+            },
+            {
+                "subject": "DWsM",
+                "class": 551,
+                "faculty": "Araasdpita Palchoudhury",
+                "batch": "A2"
+            },
+            {
+                "subject": "DWMd",
+                "class": 511,
+                "faculty": "Arpiasdasdta Palchoudhury",
+                "batch": "A3"
+            },
+            {
+                "subject": "DaWM",
+                "class": 511,
+                "faculty": "Arpiaasdta Palchoudhury",
+                "batch": "A4"
+            },
+        ]
+    },
+}
+
+*/

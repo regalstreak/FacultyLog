@@ -17,42 +17,38 @@
               label="Search"
               single-line
               hide-details
-            ></v-text-field> -->
+            ></v-text-field>-->
           </v-card-title>
-          <v-data-table
-            :headers="headers"
-            :items="ourPrincipalTimetable"
-            :search="search"
-          >
+          <v-data-table :headers="headers" :items="ourPrincipalTimetable" :search="search">
             <template v-slot:item.08:30:00-09:30:00="{ item }">
-              <SubjectBlock :subject="item['08:30:00-09:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['08:30:00-09:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.09:30:00-10:30:00="{ item }">
-              <SubjectBlock :subject="item['09:30:00-10:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['09:30:00-10:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.10:30:00-11:30:00="{ item }">
-              <SubjectBlock :subject="item['10:30:00-11:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['10:30:00-11:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.11:30:00-12:30:00="{ item }">
-              <SubjectBlock :subject="item['11:30:00-12:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['11:30:00-12:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.12:30:00-13:30:00="{ item }">
-              <SubjectBlock :subject="item['12:30:00-13:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['12:30:00-13:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.13:30:00-14:30:00="{ item }">
-              <SubjectBlock :subject="item['13:30:00-14:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['13:30:00-14:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.14:30:00-15:30:00="{ item }">
-              <SubjectBlock :subject="item['14:30:00-15:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['14:30:00-15:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.15:30:00-16:30:00="{ item }">
-              <SubjectBlock :subject="item['15:30:00-16:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['15:30:00-16:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.16:30:00-17:30:00="{ item }">
-              <SubjectBlock :subject="item['16:30:00-17:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['16:30:00-17:30:00']"></SubjectBlock>
             </template>
             <template v-slot:item.17:30:00-18:30:00="{ item }">
-              <SubjectBlock :subject="item['17:30:00-18:30:00']"></SubjectBlock>
+              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['17:30:00-18:30:00']"></SubjectBlock>
             </template>
           </v-data-table>
         </v-card>
@@ -82,6 +78,13 @@ export default {
       },
       set(newValue) {
         this.finalPrincipalTimetable = newValue;
+      }
+    },
+    ourSubjects() {
+      if (!this.finalPrincipalTimetable) {
+        return this.parentPrincipalTimetable.subjects;
+      } else {
+        return this.finalPrincipalTimetable.subjects;
       }
     }
     // ourPrincipalTimetable: {

@@ -68,6 +68,22 @@ export const getCompleteTimetable = (college, request) => {
             console.log(err);
         });
 }
+export const getCompleteFacultyTimetable = (college, request) => {
+    console.log("timtable getting");
+    return axios.post(Constants.BASE_URL + "timetable_view_faculty", {
+        params: {
+            ...request
+        },
+        college: college
+    })
+        .then((res) => {
+            // console.log(res);
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
 
 
 
