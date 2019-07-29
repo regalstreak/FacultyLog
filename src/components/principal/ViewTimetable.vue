@@ -74,20 +74,32 @@ export default {
     ...mapState(["mainOptions"]),
     ourPrincipalTimetable: {
       get() {
-        if (this.finalPrincipalTimetable.length == 0) {
-          return this.parentPrincipalTimetable;
+        if (!this.finalPrincipalTimetable) {
+          return this.parentPrincipalTimetable.time_table;
         } else {
-          return this.finalPrincipalTimetable;
+          return this.finalPrincipalTimetable.time_table;
         }
       },
       set(newValue) {
         this.finalPrincipalTimetable = newValue;
       }
     }
+    // ourPrincipalTimetable: {
+    //   get() {
+    //     if (this.finalPrincipalTimetable.length == 0) {
+    //       return this.parentPrincipalTimetable;
+    //     } else {
+    //       return this.finalPrincipalTimetable;
+    //     }
+    //   },
+    //   set(newValue) {
+    //     this.finalPrincipalTimetable = newValue;
+    //   }
+    // }
   },
   methods: {
     getOurPrincipalTimetable() {
-      this.ourPrincipalTimetable = [];
+      this.ourPrincipalTimetable = null;
       getPrincipalTimetable(
         this.mainOptions.college,
         this.mainOptions.department,
@@ -95,7 +107,7 @@ export default {
         this.divisions[this.tab]
       ).then(res => {
         this.ourPrincipalTimetable = res;
-        console.log(res);
+        console.log("asdasdasd", res);
       });
     }
   },
@@ -106,7 +118,7 @@ export default {
       tab: 0,
       ourTimetable: [],
       // days: days,
-      finalPrincipalTimetable: [],
+      finalPrincipalTimetable: null,
 
       search: "",
       headers: [

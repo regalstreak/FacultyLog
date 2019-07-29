@@ -76,7 +76,7 @@ export const getCompleteTimetable = (college, request) => {
 
 export const getPrincipalTimetable = (college, department, year, division = "A") => {
     console.log("principal timtable getting");
-    return axios.post(Constants.BASE_URL + "test", {
+    return axios.post(Constants.BASE_URL + "full_class", {
         params: {
             department: department,
             year: year,

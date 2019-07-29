@@ -167,7 +167,7 @@
 
               <v-flex>
                 <v-combobox
-                  v-model="selectOptions.classroom"
+                  v-model="selectOptions.room"
                   :items="classRooms"
                   prepend-icon="meeting_room"
                   prefix="Classroom: "
@@ -264,7 +264,7 @@ export default {
       times: times,
       days: days,
 
-      classRooms: [514, 242, 511],
+      classRooms: [514, 504, 511],
 
       startTimeMenu: false,
 
