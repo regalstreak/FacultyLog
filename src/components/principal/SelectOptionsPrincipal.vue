@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-tabs class="tabs" v-model="tab" grow>
+    <v-tabs class="tabs" @change="updateTabs($event)" v-model="tab" grow>
       <v-tabs-slider color="primary"></v-tabs-slider>
 
       <v-tab>Full class timetable</v-tab>
@@ -22,6 +22,7 @@
 import SelectMainOptions from "../timetable-coordinator/SelectMainOptions";
 import InDepthSearch from "../principal/InDepthSearch";
 export default {
+  props: ["value"],
   components: {
     SelectMainOptions,
     InDepthSearch
@@ -48,6 +49,11 @@ export default {
       text: "Lorem ipsum dolor sit .",
       finalTimetable: []
     };
+  },
+  methods: {
+    updateTabs(value) {
+      this.$emit('input', value)
+    }
   }
 };
 </script>

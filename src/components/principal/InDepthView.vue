@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-expansion-panels>
+    <div style="float: right;" class="pb-4">
+      <v-btn v-if="timetable" @click="expand">{{ expandText }}</v-btn>
+    </div>
+    <v-expansion-panels v-model="panel" multiple>
       <v-expansion-panel v-for="(x,i) in timetable" :key="i">
         <v-expansion-panel-header>{{ x.day }}</v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -21,6 +24,24 @@ export default {
   props: ["timetable"],
   components: {
     DepthBlock
+  },
+  data() {
+    return {
+      panel: [0, 1, 2, 3, 4, 5],
+      items: 6,
+      expandText: "Contract All"
+    };
+  },
+  methods: {
+    expand() {
+      if (this.panel.length === 0) {
+        this.panel = [...Array(this.items).keys()].map((k, i) => i);
+        this.expandText = "Contract All"
+      } else {
+        this.panel = [];
+        this.expandText = "Expand All"
+      }
+    }
   }
 };
 </script>

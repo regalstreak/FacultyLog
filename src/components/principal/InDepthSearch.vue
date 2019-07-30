@@ -128,7 +128,7 @@
         <v-divider class="card-divider" inset vertical></v-divider>
       </v-flex>
       <v-flex md8 xs12>
-        <div class="headline">Timetable</div>
+        <div class="headline" style="font-weight: 700; color: gray">Timetable</div>
         <div>
           <InDepthView :timetable="ourTimetable"></InDepthView>
 

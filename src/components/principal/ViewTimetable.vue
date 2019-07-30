@@ -19,7 +19,7 @@
               hide-details
             ></v-text-field>-->
           </v-card-title>
-          <v-data-table :headers="headers" :items="ourPrincipalTimetable" :search="search">
+          <v-data-table hide-default-footer :headers="headers" :items="ourPrincipalTimetable" :search="search">
             <template v-slot:item.08:30:00-09:30:00="{ item }">
               <SubjectBlock :ourSubjects="ourSubjects" :subject="item['08:30:00-09:30:00']"></SubjectBlock>
             </template>
@@ -127,59 +127,69 @@ export default {
       headers: [
         {
           text: "Day/Time",
-          align: "left",
+          align: "center",
           sortable: false,
           value: "day"
         },
         {
-          text: "08:30:00-09:30:00",
+          text: "08:30 - 09:30",
           sortable: false,
-          value: "08:30:00-09:30:00"
+          value: "08:30:00-09:30:00",
+          align: "center"
         },
         {
-          text: "09:30:00-10:30:00",
+          text: "09:30 - 10:30",
           sortable: false,
-          value: "09:30:00-10:30:00"
+          value: "09:30:00-10:30:00",
+          align: "center"
         },
         {
-          text: "10:30:00-11:30:00",
+          text: "10:30 - 11:30",
           sortable: false,
-          value: "10:30:00-11:30:00"
+          value: "10:30:00-11:30:00",
+          align: "center"
         },
         {
-          text: "11:30:00-12:30:00",
+          text: "11:30 - 12:30",
           sortable: false,
-          value: "11:30:00-12:30:00"
+          value: "11:30:00-12:30:00",
+          align: "center"
         },
         {
-          text: "12:30:00-13:30:00",
+          text: "12:30 - 13:30",
           sortable: false,
-          value: "12:30:00-13:30:00"
+          value: "12:30:00-13:30:00",
+          align: "center"
         },
         {
-          text: "13:30:00-14:30:00",
+          text: "13:30 - 14:30",
           sortable: false,
-          value: "13:30:00-14:30:00"
+          value: "13:30:00-14:30:00",
+          align: "center"
         },
         {
-          text: "14:30:00-15:30:00",
+          text: "14:30 - 15:30",
           sortable: false,
-          value: "14:30:00-15:30:00"
+          value: "14:30:00-15:30:00",
+          align: "center"
         },
         {
-          text: "15:30:00-16:30:00",
+          text: "15:30 - 16:30",
           sortable: false,
-          value: "15:30:00-16:30:00"
+          value: "15:30:00-16:30:00",
+          align: "center"
         },
         {
-          text: "16:30:00-17:30:00",
+          text: "16:30 - 17:30",
           sortable: false,
-          value: "16:30:00-17:30:00"
+          value: "16:30:00-17:30:00",
+          align: "center"
         },
         {
-          text: "17:30:00-18:30:00",
+          text: "17:30 - 18:30",
           sortable: false,
-          value: "17:30:00-18:30:00"
+          value: "17:30:00-18:30:00",
+          align: "center"
         }
       ]
     };

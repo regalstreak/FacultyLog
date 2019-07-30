@@ -1,7 +1,6 @@
 <template>
   <v-card class="subject-card">
     <v-card-text>
-      <!-- <div :style="'background: ' + getColor(subject.subject)">{{ subject.subject }}</div> -->
       <span class="teacher_name">{{ allInfo.sdrn }}</span>
       <br />
       {{ allInfo.subject }}

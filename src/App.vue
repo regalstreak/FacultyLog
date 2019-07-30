@@ -1,13 +1,3 @@
-<!--
-<template>
-  <v-app>
-    <v-content>
-      <router-view />
-    </v-content>
-  </v-app>
-</template>
--->
-
 <template>
   <v-app>
     <v-card flat v-if="abc">
@@ -23,14 +13,9 @@
     </v-card>
     <div v-else>
       <v-toolbar style="height: 10rem" color="primary" extended flat></v-toolbar>
-
-      <v-layout row pb-2>
-        <v-flex xs12 class="container-flex">
-          <v-content>
+          <v-content class="container-flex">
             <router-view></router-view>
           </v-content>
-        </v-flex>
-      </v-layout>
     </div>
   </v-app>
 </template>
@@ -71,5 +56,6 @@ body {
 
 .container-flex {
   margin: 0 4rem;
+  margin-bottom: 10rem;
 }
 </style>
