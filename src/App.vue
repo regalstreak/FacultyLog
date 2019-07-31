@@ -1,21 +1,21 @@
 <template>
   <v-app>
-    <v-card flat v-if="abc">
-      <v-toolbar style="height: 10rem" color="primary" extended flat></v-toolbar>
+    <div v-if="abc">
+      <v-toolbar style="height: 10rem" color="primary" extended flat>
+        <v-img class="logo" :src="require('./assets/rait_logo.png')" max-width="160" alt></v-img>
+      </v-toolbar>
 
-      <v-layout row pb-2>
-        <v-flex xs8 offset-xs2>
-          <v-content>
-            <router-view></router-view>
-          </v-content>
-        </v-flex>
-      </v-layout>
-    </v-card>
+      <v-content>
+        <router-view></router-view>
+      </v-content>
+    </div>
     <div v-else>
-      <v-toolbar style="height: 10rem" color="primary" extended flat></v-toolbar>
-          <v-content class="container-flex">
-            <router-view></router-view>
-          </v-content>
+      <v-toolbar style="height: 10rem" color="primary" extended flat>
+        <v-img class="logo" :src="require('./assets/rait_logo.png')" max-width="160" alt></v-img>
+      </v-toolbar>
+      <v-content class="container-flex">
+        <router-view></router-view>
+      </v-content>
     </div>
   </v-app>
 </template>
@@ -24,12 +24,15 @@
 export default {
   name: "App",
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     abc() {
-      return false;
+      if (window.innerWidth > 600) {
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 };
@@ -52,6 +55,11 @@ body {
   -o-user-select: none;
   user-select: none;
   pointer-events: none;
+}
+
+.logo {
+  margin-top: 2rem;
+  margin-left: 3rem;
 }
 
 .container-flex {

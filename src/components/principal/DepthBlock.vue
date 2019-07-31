@@ -8,6 +8,9 @@
       {{ allInfo.start_time }} - {{ allInfo.end_time }}
       <br />
       {{ allInfo.room }}
+      <br>
+      {{ allInfo.year }}
+
     </v-card-text>
   </v-card>
 </template>
