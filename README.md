@@ -1,4 +1,4 @@
-# facultylog
+# facultylog - staging
 
 ## Project setup
 ```
