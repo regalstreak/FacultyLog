@@ -8,22 +8,33 @@
       {{ allInfo.start_time }} - {{ allInfo.end_time }}
       <br />
       {{ allInfo.room }}
-      <br>
+      <br />
       {{ allInfo.year }}
-
+      {{ allInfo.srno }}
+      <v-icon class="delete" @click="deleteTimetable" color="red">close</v-icon>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import { deleteTimetable } from "../../api/API";
 export default {
-  props: ["allInfo"]
+  props: ["allInfo"],
+  methods: {
+    deleteTimetable() {
+      console.log("deleting ", this.allInfo.srno);
+      deleteTimetable("RAIT", this.allInfo.srno).catch(err => console.log(err));
+
+      // emit ourDelete to indepthview and emit parentDelete to entertimetable for clearing up after clicking delete
+      this.$emit("ourDelete", this.allInfo.srno);
+    }
+  }
 };
 </script>
 
 <style scoped lang="stylus">
 .teacher_name {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .subject-card {
@@ -34,6 +45,26 @@ export default {
 
   &:hover {
     background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.delete {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 12px;
+  padding: 4px;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+
+  &:hover {
+    background: #AA000066;
+    cursor: pointer;
+    border-radius: 50%;
   }
 }
 </style>

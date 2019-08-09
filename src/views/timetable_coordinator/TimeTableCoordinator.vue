@@ -1,6 +1,6 @@
 <template>
   <v-card class="card--flex-toolbar">
-    <v-toolbar dark color="secondary darken-1" >
+    <v-toolbar dark color="secondary darken-1">
       <v-toolbar-title>Timetable</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -27,7 +27,7 @@
 
           <v-layout>
             <v-flex xs12 class="text-xs-right">
-              <v-btn color="primary" @click="getOurTimetable()">Next</v-btn>
+              <v-btn color="primary" @click="getFullTimetable()">Next</v-btn>
             </v-flex>
           </v-layout>
         </v-stepper-content>
@@ -54,11 +54,24 @@
 import SelectOptions from "../../components/timetable-coordinator/SelectMainOptions";
 import EnterTimetable from "../../components/timetable-coordinator/EnterTimetable";
 import { mapState } from "vuex";
-import { getTimetable, getFacultyInfo } from "../../api/API";
+import {
+  getTimetable,
+  getFacultyInfo,
+  getCompleteFacultyTimetable
+} from "../../api/API";
 
 export default {
   data() {
     return {
+      selectOptions: {
+        // department: "",
+        // division: "",
+        // year: "",
+        day: "",
+        time: "",
+        sdrn: "",
+        room: ""
+      },
       e1: 0,
       facultyInfo: [],
       timetableParent: []
@@ -72,6 +85,31 @@ export default {
     ...mapState(["mainOptions"])
   },
   methods: {
+    getFullTimetable() {
+      const vm = this;
+      getCompleteFacultyTimetable("RAIT", {
+        ...this.selectOptions,
+        department: vm.mainOptions.department,
+        year: vm.mainOptions.year,
+        division: "A"
+      }).then(res => {
+        this.timetableParent = res;
+        console.log(res);
+      });
+
+      getFacultyInfo(
+        this.mainOptions.college,
+        this.mainOptions.department,
+        this.mainOptions.year
+      )
+        .then(res => {
+          console.log(res);
+          this.facultyInfo = res;
+        })
+        .catch(err => console.log(err));
+
+      this.e1 = 2;
+    },
     getOurTimetable() {
       console.log(this.mainOptions.department);
       getTimetable(

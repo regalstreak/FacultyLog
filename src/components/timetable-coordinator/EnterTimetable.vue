@@ -5,7 +5,7 @@
       <v-tab v-for="n in 3" :key="n">Item {{ n }}</v-tab>
     </v-tabs>-->
 
-    <v-tabs @change="getOurTimetable" class="tabs" v-model="tab" grow>
+    <v-tabs @change="getFullTimetable()" class="tabs" v-model="tab" grow>
       <v-tabs-slider color="primary"></v-tabs-slider>
 
       <v-tab v-for="division in divisions" :key="division">{{ division }}</v-tab>
@@ -14,7 +14,7 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="(division) in divisions" :key="division">
         <v-layout wrap>
-          <v-flex md5 xs12>
+          <v-flex md3 xs12>
             <v-layout column>
               <v-flex>
                 <v-combobox
@@ -196,11 +196,11 @@
           <v-flex md1 xs12>
             <v-divider class="card-divider" inset vertical></v-divider>
           </v-flex>
-          <v-flex md6 xs12>
+          <v-flex md8 xs12>
             <div class="headline">Timetable</div>
             <div>
-              <v-container style="max-height: 400px" class="overflow-y-auto">
-                <v-card v-for="(x, index) in ourTimetable" class="timetable-card" :key="index">
+              <!-- <v-container style="max-height: 400px" class="overflow-y-auto"> -->
+              <!-- <v-card v-for="(x, index) in ourTimetable" class="timetable-card" :key="index">
                   <v-card-title>
                     <div class="subject_container">
                       <div class="headline">{{x.day}} - {{x.subject}}</div>
@@ -219,8 +219,15 @@
                       <v-flex>Batches: {{ x.batch }}</v-flex>
                     </v-layout>
                   </v-card-text>
-                </v-card>
-              </v-container>
+              </v-card>-->
+
+              <InDepthView
+                @parentDelete="deleteRecord"
+                :key="keyCounter"
+                :timetable="ourTimetable"
+              ></InDepthView>
+
+              <!-- </v-container> -->
             </div>
           </v-flex>
         </v-layout>
@@ -230,7 +237,12 @@
 </template>
 
 <script>
-import { getTimetable, addTimetable, deleteTimetable } from "../../api/API";
+import InDepthView from "../../components/principal/InDepthView";
+import {
+  getTimetable,
+  addTimetable,
+  getCompleteFacultyTimetable
+} from "../../api/API";
 import { mapState } from "vuex";
 
 export default {
@@ -288,6 +300,18 @@ export default {
         batch: "All"
       },
 
+      viewOptions: {
+        // department: "",
+        // division: "",
+        // year: "",
+        day: "",
+        time: "",
+        sdrn: "",
+        room: ""
+      },
+
+      keyCounter: 0,
+
       divisions: ["A", "B", "C"],
       noOfCards: 5,
       tab: 0,
@@ -316,6 +340,7 @@ export default {
         }
       },
       set(newValue) {
+        this.keyCounter++;
         this.finalTimetable = newValue;
       }
     },
@@ -339,9 +364,10 @@ export default {
     }
   },
   props: ["timetable", "faculty"],
-
+  components: {
+    InDepthView
+  },
   methods: {
-
     addCard() {
       // this.noOfCards++;
       addTimetable(
@@ -354,7 +380,7 @@ export default {
         this.mainOptions.college
       ).then(res => console.log(res));
 
-      this.getOurTimetable();
+      this.getFullTimetable();
     },
     getOurTimetable() {
       this.ourTimetable = [];
@@ -368,6 +394,19 @@ export default {
         console.log(res);
       });
     },
+    getFullTimetable() {
+      const vm = this;
+      this.ourTimetable = [];
+      getCompleteFacultyTimetable("RAIT", {
+        ...this.viewOptions,
+        department: vm.mainOptions.department,
+        year: vm.mainOptions.year,
+        division: this.divisions[this.tab]
+      }).then(res => {
+        this.ourTimetable = res;
+        console.log(res);
+      });
+    },
     getSdrn(teacherName) {
       let abc = this.faculty.faculty.find(function(element) {
         return element.name == teacherName;
@@ -375,14 +414,12 @@ export default {
       this.selectOptions.sdrn = abc.sdrn.toString();
     },
     deleteRecord(srno) {
-      console.log("deleting ", srno);
-      deleteTimetable(this.mainOptions.college, srno).catch(err =>
-        console.log(err)
-      );
+      console.log("deleted something " + srno);
 
       this.ourTimetable = [];
 
-      this.getOurTimetable();
+      // this.getOurTimetable();
+      this.getFullTimetable();
     }
   }
 };

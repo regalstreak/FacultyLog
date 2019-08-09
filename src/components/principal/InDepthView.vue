@@ -9,7 +9,7 @@
         <v-expansion-panel-content>
           <v-layout wrap>
             <v-flex xs12 sm6 md4 lg3 xl2 v-for="(abc, index) in x.timetable" :key="index">
-              <DepthBlock :allInfo="abc"></DepthBlock>
+              <DepthBlock @ourDelete="parentdelete" :allInfo="abc"></DepthBlock>
             </v-flex>
           </v-layout>
         </v-expansion-panel-content>
@@ -33,13 +33,17 @@ export default {
     };
   },
   methods: {
+    parentdelete(srno) {
+      console.log("parent "+ srno);
+      this.$emit("parentDelete", srno)
+    },
     expand() {
       if (this.panel.length === 0) {
         this.panel = [...Array(this.items).keys()].map((k, i) => i);
-        this.expandText = "Contract All"
+        this.expandText = "Contract All";
       } else {
         this.panel = [];
-        this.expandText = "Expand All"
+        this.expandText = "Expand All";
       }
     }
   }
