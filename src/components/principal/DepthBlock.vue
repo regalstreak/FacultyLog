@@ -10,7 +10,6 @@
       {{ allInfo.room }}
       <br />
       {{ allInfo.year }}
-      {{ allInfo.srno }}
       <v-icon class="delete" @click="deleteTimetable" color="red">close</v-icon>
     </v-card-text>
   </v-card>
