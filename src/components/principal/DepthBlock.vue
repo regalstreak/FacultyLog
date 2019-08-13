@@ -9,7 +9,7 @@
       <br />
       {{ allInfo.room }}
       <br />
-      {{ allInfo.year }}
+      {{ allInfo.year }} - {{ allInfo.division }} - {{ allInfo.batch }}
       <v-icon class="delete" @click="deleteTimetable" color="red">close</v-icon>
     </v-card-text>
   </v-card>
