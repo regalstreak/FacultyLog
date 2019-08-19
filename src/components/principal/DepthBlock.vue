@@ -10,7 +10,7 @@
       {{ allInfo.room }}
       <br />
       {{ allInfo.year }} - {{ allInfo.division }} - {{ allInfo.batch }}
-      <v-icon class="delete" @click="deleteTimetable" color="red">close</v-icon>
+      <v-icon v-if="route == '/ttc'" class="delete" @click="deleteTimetable" color="red">close</v-icon>
     </v-card-text>
   </v-card>
 </template>
@@ -19,6 +19,15 @@
 import { deleteTimetable } from "../../api/API";
 export default {
   props: ["allInfo"],
+  data() {
+    return {
+      route: "/principal"
+    }
+  },
+
+  mounted() {
+    this.route = this.$router.currentRoute.path;
+  },
   methods: {
     deleteTimetable() {
       console.log("deleting ", this.allInfo.srno);
