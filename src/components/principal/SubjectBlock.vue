@@ -130,6 +130,7 @@ export default {
   margin: 1rem 0;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0);
+  text-align: center;
 
   &:hover {
     background: rgba(255, 255, 255, 0.8);

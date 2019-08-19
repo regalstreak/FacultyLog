@@ -19,37 +19,23 @@
               hide-details
             ></v-text-field>-->
           </v-card-title>
-          <v-data-table hide-default-footer :headers="headers" :items="ourPrincipalTimetable" :search="search">
-            <template v-slot:item.08:30:00-09:30:00="{ item }">
+          <v-data-table
+            hide-default-footer
+            :headers="parentPrincipalTimetable.format.header"
+            :items="ourPrincipalTimetable"
+            :search="search"
+          >
+            <template v-slot:item="{ item }">
+              <tr>
+                <td v-for="(header, index) in parentPrincipalTimetable.format.header" :key="index">
+                  <div v-if="index == 0">{{ item.day }}</div>
+                  <SubjectBlock v-else :ourSubjects="ourSubjects" :subject="item[header.value]"></SubjectBlock>
+                </td>
+              </tr>
+            </template>
+            <!-- for reference <template v-slot:item.08:30:00-09:30:00="{ item }">
               <SubjectBlock :ourSubjects="ourSubjects" :subject="item['08:30:00-09:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.09:30:00-10:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['09:30:00-10:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.10:30:00-11:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['10:30:00-11:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.11:30:00-12:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['11:30:00-12:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.12:30:00-13:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['12:30:00-13:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.13:30:00-14:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['13:30:00-14:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.14:30:00-15:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['14:30:00-15:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.15:30:00-16:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['15:30:00-16:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.16:30:00-17:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['16:30:00-17:30:00']"></SubjectBlock>
-            </template>
-            <template v-slot:item.17:30:00-18:30:00="{ item }">
-              <SubjectBlock :ourSubjects="ourSubjects" :subject="item['17:30:00-18:30:00']"></SubjectBlock>
-            </template>
+            </template>-->
           </v-data-table>
         </v-card>
       </v-tab-item>
