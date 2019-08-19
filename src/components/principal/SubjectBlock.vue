@@ -20,7 +20,7 @@
         <div @click="hover = true">
           <v-card :color="getColor(subject.info.subject)" flat class="subject-card">
             <v-card-text>
-              Practicals
+              Practicals/Elective
               <br />
               <br />
               <br />
