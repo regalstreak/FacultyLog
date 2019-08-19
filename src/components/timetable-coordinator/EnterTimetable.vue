@@ -48,7 +48,7 @@
                       v-model="selectOptions.start_time"
                       :items="times"
                       prepend-icon="access_time"
-                      prefix="Start time: "
+                      prefix="Start:"
                     ></v-combobox>
                     <!-- <v-combobox
                       v-model="selectOptions.start_time"
@@ -107,7 +107,7 @@
                       v-model="selectOptions.end_time"
                       :items="times"
                       prepend-icon="alarm"
-                      prefix="End time: "
+                      prefix="End:"
                     ></v-combobox>
                     <!-- <v-combobox
                       v-model="selectOptions.end_time"
@@ -257,17 +257,28 @@ export default {
     ];
 
     const times = [
+      "08:00:00",
       "08:30:00",
+      "09:00:00",
       "09:30:00",
+      "10:00:00",
       "10:30:00",
+      "11:00:00",
       "11:30:00",
+      "12:00:00",
       "12:30:00",
+      "13:00:00",
       "13:30:00",
+      "14:00:00",
       "14:30:00",
+      "15:00:00",
       "15:30:00",
+      "16:00:00",
       "16:30:00",
+      "17:00:00",
       "17:30:00",
-      "18:30:00"
+      "18:00:00",
+      "18:30:00",
     ];
 
     return {
