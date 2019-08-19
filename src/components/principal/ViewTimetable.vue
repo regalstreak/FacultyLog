@@ -21,13 +21,13 @@
           </v-card-title>
           <v-data-table
             hide-default-footer
-            :headers="parentPrincipalTimetable.format.header"
+            :headers="ourHeaders"
             :items="ourPrincipalTimetable"
             :search="search"
           >
             <template v-slot:item="{ item }">
               <tr>
-                <td v-for="(header, index) in parentPrincipalTimetable.format.header" :key="index">
+                <td v-for="(header, index) in ourHeaders" :key="index">
                   <div v-if="index == 0">{{ item.day }}</div>
                   <SubjectBlock v-else :ourSubjects="ourSubjects" :subject="item[header.value]"></SubjectBlock>
                 </td>
@@ -52,6 +52,9 @@ export default {
   components: {
     SubjectBlock
   },
+  mounted() {
+    this.ourHeaders = this.headers;
+  },
   computed: {
     ...mapState(["mainOptions"]),
     ourPrincipalTimetable: {
@@ -66,6 +69,18 @@ export default {
         this.finalPrincipalTimetable = newValue;
       }
     },
+    ourHeaders: {
+      get() {
+        if (this.finalPrincipalTimetable === null) {
+          return this.parentPrincipalTimetable.format.header;
+        } else {
+          return this.dataHeaders;
+        }
+      },
+      set(newValue) {
+        this.dataHeaders = newValue;
+      }
+    },
     ourSubjects() {
       if (!this.finalPrincipalTimetable) {
         return this.parentPrincipalTimetable.subjects;
@@ -73,18 +88,6 @@ export default {
         return this.finalPrincipalTimetable.subjects;
       }
     }
-    // ourPrincipalTimetable: {
-    //   get() {
-    //     if (this.finalPrincipalTimetable.length == 0) {
-    //       return this.parentPrincipalTimetable;
-    //     } else {
-    //       return this.finalPrincipalTimetable;
-    //     }
-    //   },
-    //   set(newValue) {
-    //     this.finalPrincipalTimetable = newValue;
-    //   }
-    // }
   },
   methods: {
     getOurPrincipalTimetable() {
@@ -96,8 +99,13 @@ export default {
         this.divisions[this.tab]
       ).then(res => {
         this.ourPrincipalTimetable = res;
+        this.ourHeaders = res.format.header;
         console.log("asdasdasd", res);
       });
+    },
+    getHeaders() {
+      console.log(this.ourHeaders);
+      return this.ourHeaders;
     }
   },
   props: ["parentPrincipalTimetable"],
@@ -110,6 +118,7 @@ export default {
       finalPrincipalTimetable: null,
 
       search: "",
+      dataHeaders: null,
       headers: [
         {
           text: "Day/Time",
