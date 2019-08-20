@@ -21,15 +21,17 @@
           </v-card-title>
           <v-data-table
             hide-default-footer
-            :headers="ourHeaders"
+            :headers="headers"
             :items="ourPrincipalTimetable"
             :search="search"
           >
             <template v-slot:item="{ item }">
               <tr>
-                <td v-for="(header, index) in ourHeaders" :key="index">
-                  <div v-if="index == 0">{{ item.day }}</div>
-                  <SubjectBlock v-else :ourSubjects="ourSubjects" :subject="item[header.value]"></SubjectBlock>
+                <td v-for="(header, index) in headers" :key="index">
+                  <div class="center-block">
+                    <div v-if="index == 0">{{ item.day }}</div>
+                    <SubjectBlock v-else :ourSubjects="ourSubjects" :subject="item[header.value]"></SubjectBlock>
+                  </div>
                 </td>
               </tr>
             </template>
@@ -52,9 +54,7 @@ export default {
   components: {
     SubjectBlock
   },
-  mounted() {
-    this.ourHeaders = this.headers;
-  },
+  mounted() {},
   computed: {
     ...mapState(["mainOptions"]),
     ourPrincipalTimetable: {
@@ -67,18 +67,6 @@ export default {
       },
       set(newValue) {
         this.finalPrincipalTimetable = newValue;
-      }
-    },
-    ourHeaders: {
-      get() {
-        if (this.finalPrincipalTimetable === null) {
-          return this.parentPrincipalTimetable.format.header;
-        } else {
-          return this.dataHeaders;
-        }
-      },
-      set(newValue) {
-        this.dataHeaders = newValue;
       }
     },
     ourSubjects() {
@@ -99,13 +87,13 @@ export default {
         this.divisions[this.tab]
       ).then(res => {
         this.ourPrincipalTimetable = res;
-        this.ourHeaders = res.format.header;
-        console.log("asdasdasd", res);
+        this.headers = res.format.header;
       });
-    },
-    getHeaders() {
-      console.log(this.ourHeaders);
-      return this.ourHeaders;
+    }
+  },
+  watch: {
+    headers: function(val) {
+      console.log(val);
     }
   },
   props: ["parentPrincipalTimetable"],
@@ -114,11 +102,9 @@ export default {
       divisions: ["A", "B", "C"],
       tab: 0,
       ourTimetable: [],
-      // days: days,
       finalPrincipalTimetable: null,
-
+      finalHeaders: null,
       search: "",
-      dataHeaders: null,
       headers: [
         {
           text: "Day/Time",
@@ -194,7 +180,13 @@ export default {
 
 <style lang="stylus" scoped>
 // td {
-//   padding: 0 !important;
-//   margin: 0 !important;
+// padding: 0 !important;
+// margin: 0 !important;
 // }
+.center-block {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
