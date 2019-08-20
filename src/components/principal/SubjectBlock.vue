@@ -79,24 +79,30 @@ export default {
 
       switch (subject) {
         case this.ourSubjects[0]: {
-          return "#d4f2dbFF";
+          return "#FF555E";
         }
         case this.ourSubjects[1]: {
-          return "#cef7a0FF";
+          return "#FF8650";
         }
         case this.ourSubjects[2]: {
-          return "#fc9f5bFF";
+          return "#FFE981";
         }
         case this.ourSubjects[3]: {
-          return "#fbd1a2FF";
+          return "#8BF18B";
         }
         case this.ourSubjects[4]: {
-          return "#ffa5abFF";
+          return "#9B6EF3";
         }
         case this.ourSubjects[5]: {
-          return "#3311CC66";
+          return "#BDBDBD";
         }
-        case this.ourSubjects[6]: {
+        case this.ourSubjects[7]: {
+          return "#fba2e5FF";
+        }
+        case this.ourSubjects[8]: {
+          return "red";
+        }
+        case this.ourSubjects[9]: {
           return "red";
         }
         default: {

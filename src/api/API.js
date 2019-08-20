@@ -101,7 +101,7 @@ export const getPrincipalTimetable = (college, department, year, division = "A")
         college: college
     })
         .then((res) => {
-            console.log(res);
+            // console.log(res);
             return res.data;
         })
         .catch((err) => {
