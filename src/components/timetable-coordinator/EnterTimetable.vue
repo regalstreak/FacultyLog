@@ -253,7 +253,8 @@ export default {
       "Wednesday",
       "Thursday",
       "Friday",
-      "Saturday"
+      "SaturdayEven",
+      "SaturdayOdd",
     ];
 
     const times = [
