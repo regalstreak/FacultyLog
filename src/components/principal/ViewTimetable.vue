@@ -10,6 +10,10 @@
       <v-tab-item v-for="(division) in divisions" :key="division">
         <v-card>
           <v-card-title>
+            <div
+              style="width: 100vw;text-align: center;font-weight: 700; color: grey"
+              class="headline"
+            >{{mainOptions.year}} - {{divisions[tab]}}</div>
             <v-spacer></v-spacer>
             <!-- <v-text-field
               v-model="search"

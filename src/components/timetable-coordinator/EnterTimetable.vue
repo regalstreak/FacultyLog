@@ -16,6 +16,9 @@
         <v-layout wrap>
           <v-flex md3 xs12>
             <v-layout column>
+              <v-flex style="font-weight: 700; color: grey" class="headline">
+               {{mainOptions.year}} - {{divisions[tab]}}
+              </v-flex>
               <v-flex>
                 <v-combobox
                   v-model="selectOptions.day"
@@ -197,7 +200,7 @@
             <v-divider class="card-divider" inset vertical></v-divider>
           </v-flex>
           <v-flex md8 xs12>
-            <div class="headline">Timetable</div>
+            <div style="font-weight: 700; color: gray" class="headline">Timetable</div>
             <div>
               <!-- <v-container style="max-height: 400px" class="overflow-y-auto"> -->
               <!-- <v-card v-for="(x, index) in ourTimetable" class="timetable-card" :key="index">
