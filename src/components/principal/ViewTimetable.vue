@@ -13,7 +13,7 @@
             <div
               style="width: 100vw;text-align: center;font-weight: 700; color: grey"
               class="headline"
-            >{{mainOptions.year}} - {{divisions[tab]}}</div>
+            >{{mainOptions.college}} - {{mainOptions.department}} - {{mainOptions.year}} - {{divisions[tab]}}</div>
             <v-spacer></v-spacer>
             <!-- <v-text-field
               v-model="search"

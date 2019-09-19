@@ -57,7 +57,7 @@
     </div>
     <div v-else>
       <v-card flat class="subject-card">
-        <v-card-text>none</v-card-text>
+        <v-card-text></v-card-text>
       </v-card>
     </div>
   </div>
