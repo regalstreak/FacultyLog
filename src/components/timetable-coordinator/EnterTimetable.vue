@@ -17,7 +17,7 @@
           <v-flex md3 xs12>
             <v-layout column>
               <v-flex style="font-weight: 700; color: grey" class="headline">
-               {{mainOptions.year}} - {{divisions[tab]}}
+              {{mainOptions.college}} - {{mainOptions.department}} - {{mainOptions.year}} - {{divisions[tab]}}
               </v-flex>
               <v-flex>
                 <v-combobox

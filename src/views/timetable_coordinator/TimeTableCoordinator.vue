@@ -1,11 +1,13 @@
 <template>
   <v-card class="card--flex-toolbar">
     <v-toolbar dark color="secondary darken-1">
-      <v-toolbar-title>Timetable</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>search</v-icon>
+      <v-btn icon @click="e1 = 1">
+        <v-icon>arrow_back</v-icon>
       </v-btn>
+      <v-btn icon @click="e1 = 2">
+        <v-icon>arrow_forward</v-icon>
+      </v-btn>
+      <v-toolbar-title style="margin-left: 1rem;">Timetable Coordinator</v-toolbar-title>
     </v-toolbar>
 
     <v-stepper v-model="e1">
