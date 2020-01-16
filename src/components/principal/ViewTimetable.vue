@@ -79,6 +79,27 @@ export default {
       } else {
         return this.finalPrincipalTimetable.subjects;
       }
+    },
+    divisions() {
+      if (this.mainOptions.department === "FE") {
+        return [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M"
+        ];
+      } else {
+        return ["A", "B", "C"];
+      }
     }
   },
   methods: {
@@ -103,7 +124,7 @@ export default {
   props: ["parentPrincipalTimetable"],
   data() {
     return {
-      divisions: ["A", "B", "C"],
+      // divisions: ["A", "B", "C"],
       tab: 0,
       ourTimetable: [],
       finalPrincipalTimetable: null,

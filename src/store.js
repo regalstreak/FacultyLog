@@ -23,6 +23,10 @@ export default new Vuex.Store({
           break;
         } case "department": {
           state.mainOptions.department = payload.option;
+          // FE hack
+          if (payload.option === 'FE') {
+            state.mainOptions.year = 'FE';
+          }
           break;
         } case "year": {
           state.mainOptions.year = payload.option;

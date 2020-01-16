@@ -43,7 +43,7 @@
               prepend-icon="today"
               prefix="Day: "
             ></v-combobox>
-          </v-flex> -->
+          </v-flex>-->
           <!-- <v-flex>
             <v-combobox
               v-model="selectOptions.subject"
@@ -193,7 +193,7 @@ export default {
     return {
       departments: ["COMPS", "EXTC", "ETRX", "EXTC", "IT", "FE", "INSTRU"],
       year: ["FE", "SE", "TE", "BE"],
-      divisions: ["A", "B", "C"],
+      // divisions: ["A", "B", "C"],
       days: days,
       college: ["RAIT"],
       teacherSelect: "",
@@ -209,7 +209,7 @@ export default {
         department: "",
         division: "",
         year: "",
-        day: "",  
+        day: "",
         time: "",
         // subject: "",
         sdrn: "",
@@ -265,6 +265,27 @@ export default {
         return abc;
       } else {
         return ["error", "in", "getting", "data"];
+      }
+    },
+    divisions() {
+      if (this.selectOptions.year === "FE") {
+        return [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M"
+        ];
+      } else {
+        return ["A", "B", "C"];
       }
     }
   },

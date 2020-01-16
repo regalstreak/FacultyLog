@@ -16,9 +16,10 @@
         <v-layout wrap>
           <v-flex md3 xs12>
             <v-layout column>
-              <v-flex style="font-weight: 700; color: grey" class="headline">
-              {{mainOptions.college}} - {{mainOptions.department}} - {{mainOptions.year}} - {{divisions[tab]}}
-              </v-flex>
+              <v-flex
+                style="font-weight: 700; color: grey"
+                class="headline"
+              >{{mainOptions.college}} - {{mainOptions.department}} - {{mainOptions.year}} - {{divisions[tab]}}</v-flex>
               <v-flex>
                 <v-combobox
                   v-model="selectOptions.day"
@@ -224,11 +225,7 @@
                   </v-card-text>
               </v-card>-->
 
-              <InDepthView
-                @parentDelete="deleteRecord"
-                :key="keyCounter"
-                :timetable="ourTimetable"
-              ></InDepthView>
+              <InDepthView @parentDelete="deleteRecord" :key="keyCounter" :timetable="ourTimetable"></InDepthView>
 
               <!-- </v-container> -->
             </div>
@@ -329,7 +326,6 @@ export default {
 
       keyCounter: 0,
 
-      divisions: ["A", "B", "C"],
       noOfCards: 5,
       tab: 0,
       text: "Lorem ipsum dolor sit .",
@@ -377,6 +373,13 @@ export default {
         return abc;
       } else {
         return ["error", "in", "getting", "data"];
+      }
+    },
+    divisions() {
+      if(this.mainOptions.department === 'FE') {
+        return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]
+      } else {
+        return ["A", "B", "C"]
       }
     }
   },
