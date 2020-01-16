@@ -233,6 +233,10 @@
         </v-layout>
       </v-tab-item>
     </v-tabs-items>
+    <v-snackbar v-model="errorSnackbar.display" :timeout="5000">
+      {{errorSnackbar.text}}
+      <v-btn color="primary" text @click="errorSnackbar.display = false">Close</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -254,7 +258,7 @@ export default {
       "Thursday",
       "Friday",
       "SaturdayEven",
-      "SaturdayOdd",
+      "SaturdayOdd"
     ];
 
     const times = [
@@ -281,7 +285,7 @@ export default {
       "18:00:00",
       "18:30:00",
       "19:00:00",
-      "19:30:00",
+      "19:30:00"
     ];
 
     return {
@@ -289,6 +293,11 @@ export default {
       items: ["Programming", "Design", "Vue", "Vuetify"],
       times: times,
       days: days,
+
+      errorSnackbar: {
+        display: false,
+        text: ""
+      },
 
       classRooms: [514, 504, 511],
 
@@ -376,10 +385,24 @@ export default {
       }
     },
     divisions() {
-      if(this.mainOptions.department === 'FE') {
-        return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]
+      if (this.mainOptions.department === "FE") {
+        return [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M"
+        ];
       } else {
-        return ["A", "B", "C"]
+        return ["A", "B", "C"];
       }
     }
   },
@@ -398,7 +421,14 @@ export default {
         },
         this.divisions[this.tab],
         this.mainOptions.college
-      ).then(res => console.log(res));
+      ).then(res => {
+        console.log(res);
+        if (res.error) {
+          // show error
+          this.errorSnackbar.display = true;
+          this.errorSnackbar.text = res.error;
+        }
+      });
 
       this.getFullTimetable();
     },
