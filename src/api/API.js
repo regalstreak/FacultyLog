@@ -1,11 +1,6 @@
 import axios from "axios";
 import Constants from "./Constants.js"
 
-// axios
-//     .get("http://192.168.43.208:8000/")
-//     .then(response => console.log(response))
-//     .catch(err => console.log(err));
-
 export const test = () => {
     console.log("test called")
     return axios.get(Constants.BASE_URL)
@@ -85,11 +80,6 @@ export const getCompleteFacultyTimetable = (college, request) => {
         });
 }
 
-
-
-
-
-
 export const getPrincipalTimetable = (college, department, year, division = "A") => {
     console.log("principal timtable getting");
     return axios.post(Constants.BASE_URL + "full_class", {
@@ -108,17 +98,6 @@ export const getPrincipalTimetable = (college, department, year, division = "A")
             console.log(err);
         });
 }
-
-
-
-
-
-
-
-
-
-
-
 
 export const getFacultyInfo = (college, department, year) => {
     console.log("getting faculty info");
@@ -153,7 +132,7 @@ export const getAllFacultyInfo = (college) => {
 }
 
 export const addTimetable = (request, division = "A", college) => {
-    console.log("timtable getting");
+    console.log("Adding timetable");
     return axios.post(Constants.BASE_URL + "timetable_enter", {
         params: {
             division: division,
@@ -184,4 +163,15 @@ export const deleteTimetable = (college, srno) => {
         .catch((err) => {
             console.log(err);
         });
+}
+
+export const printTimetableClass = (college, request) => {
+    console.log('getting csv');
+    let paramsString = `?college=${college}&params[division]=${request.division}&params[year]=${request.year}&params[department]=${request.department}`
+    return axios.get(Constants.BASE_URL + "print_time_table_class" + paramsString, {
+    }).then(res => {
+        return res;
+    }).catch(err => {
+        console.log(err)
+    })
 }

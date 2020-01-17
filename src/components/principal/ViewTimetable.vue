@@ -11,10 +11,18 @@
         <v-card>
           <v-card-title>
             <div
-              style="width: 100vw;text-align: center;font-weight: 700; color: grey"
-              class="headline"
-            >{{mainOptions.college}} - {{mainOptions.department}} - {{mainOptions.year}} - {{divisions[tab]}}</div>
-            <v-spacer></v-spacer>
+              style="display: flex; justify-content: space-between; align-items: center; width: 100%;"
+            >
+              <div></div>
+              <div
+                style="transform: translateX(5rem); text-align: center;font-weight: 700; color: grey"
+                class="headline"
+              >{{mainOptions.college}} - {{mainOptions.department}} - {{mainOptions.year}} - {{divisions[tab]}}</div>
+              <v-btn @click="downloadCSV" color="primary">
+                <span>Download CSV &nbsp;</span>
+                <v-icon small>arrow_downward</v-icon>
+              </v-btn>
+            </div>
             <!-- <v-text-field
               v-model="search"
               append-icon="search"
@@ -53,7 +61,7 @@
 // import axios from "axios";
 import SubjectBlock from "./SubjectBlock";
 import { mapState } from "vuex";
-import { getPrincipalTimetable } from "../../api/API";
+import { getPrincipalTimetable, printTimetableClass } from "../../api/API";
 export default {
   components: {
     SubjectBlock
@@ -113,6 +121,26 @@ export default {
       ).then(res => {
         this.ourPrincipalTimetable = res;
         this.headers = res.format.header;
+      });
+    },
+    downloadCSV() {
+      printTimetableClass("RAIT", {
+        division: this.divisions[this.tab],
+        year: this.mainOptions.year,
+        department: this.mainOptions.department
+      }).then(res => {
+        let blob = new Blob([res.data], { type: "application/csv" });
+        let fileUrl = window.URL.createObjectURL(blob);
+        let fileLink = document.createElement("a");
+        fileLink.href = fileUrl;
+        fileLink.setAttribute(
+          "download",
+          `time_table_${this.mainOptions.college}_${
+            this.mainOptions.department
+          }_${this.mainOptions.year}_${this.divisions[this.tab]}.csv`
+        );
+        document.body.appendChild(fileLink);
+        fileLink.click();
       });
     }
   },
