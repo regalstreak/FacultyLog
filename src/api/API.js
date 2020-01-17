@@ -166,9 +166,31 @@ export const deleteTimetable = (college, srno) => {
 }
 
 export const printTimetableClass = (college, request) => {
-    console.log('getting csv');
+    console.log('getting csv class');
     let paramsString = `?college=${college}&params[division]=${request.division}&params[year]=${request.year}&params[department]=${request.department}`
     return axios.get(Constants.BASE_URL + "print_time_table_class" + paramsString, {
+    }).then(res => {
+        return res;
+    }).catch(err => {
+        console.log(err)
+    })
+}
+
+export const printTimetableFaculty = (college, request) => {
+    console.log('getting csv faculty');
+    let paramsString = `?college=${college}&params[sdrn]=${request.sdrn}`
+    return axios.get(Constants.BASE_URL + "print_time_table_faculty" + paramsString, {
+    }).then(res => {
+        return res;
+    }).catch(err => {
+        console.log(err)
+    })
+}
+
+export const printTimetableRoom = (college, request) => {
+    console.log('getting csv faculty');
+    let paramsString = `?college=${college}&params[room]=${request.room}`
+    return axios.get(Constants.BASE_URL + "print_time_table_room" + paramsString, {
     }).then(res => {
         return res;
     }).catch(err => {
