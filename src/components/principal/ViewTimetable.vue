@@ -89,7 +89,7 @@ export default {
       }
     },
     divisions() {
-      if (this.mainOptions.department === "FE") {
+      if (this.mainOptions.year === "FE") {
         return [
           "A",
           "B",
@@ -106,7 +106,11 @@ export default {
           "M"
         ];
       } else {
-        return ["A", "B", "C"];
+        if (this.mainOptions.department === "ETRX") {
+          return ["A", "B", "C", "D"];
+        } else {
+          return ["A", "B", "C"];
+        }
       }
     }
   },
