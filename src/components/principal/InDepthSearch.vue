@@ -283,7 +283,10 @@ export default {
       }
     },
     divisions() {
-      if (this.selectOptions.year === "FE") {
+      if (
+        this.selectOptions.year === "FE" ||
+        this.selectOptions.department === "FE"
+      ) {
         return [
           "A",
           "B",
@@ -300,7 +303,11 @@ export default {
           "M"
         ];
       } else {
-        return ["A", "B", "C"];
+        if (this.selectOptions.department === "ETRX") {
+          return ["A", "B", "C", "D"];
+        } else {
+          return ["A", "B", "C"];
+        }
       }
     }
   },
