@@ -122,6 +122,16 @@
         >
           <v-icon dark>search</v-icon>
         </v-btn>
+        <v-btn
+          fab
+          small
+          class="mx-4"
+          @click="downloadTimetable()"
+          style="float: right; transform: translateX(1.5rem)"
+          color="primary"
+        >
+          <v-icon dark>arrow_downward</v-icon>
+        </v-btn>
       </v-flex>
 
       <v-flex md1 xs12>
@@ -158,7 +168,12 @@
 </template>
 
 <script>
-import { getAllFacultyInfo, getCompleteFacultyTimetable } from "../../api/API";
+import {
+  getAllFacultyInfo,
+  getCompleteFacultyTimetable,
+  printTimetableRoom,
+  printTimetableFaculty
+} from "../../api/API";
 import { mapState } from "vuex";
 import InDepthView from "./InDepthView";
 
@@ -346,6 +361,43 @@ export default {
           console.log(res);
         }
       );
+    },
+    downloadTimetable() {
+      this.getSdrn();
+      if (this.selectOptions.room && !this.selectOptions.sdrn) {
+        // get time table room
+        printTimetableRoom(this.mainOptions.college, this.selectOptions)
+          .then(res => {
+            let blob = new Blob([res.data], { type: "application/csv" });
+            let fileUrl = window.URL.createObjectURL(blob);
+            let fileLink = document.createElement("a");
+            fileLink.href = fileUrl;
+            fileLink.setAttribute(
+              "download",
+              `time_table_room_${this.mainOptions.college}_${this.selectOptions.room}.csv`
+            );
+            document.body.appendChild(fileLink);
+            fileLink.click();
+          })
+          .catch(err => console.log(err));
+      }
+      if (this.selectOptions.sdrn && !this.selectOptions.room) {
+        // get timetable faculty teacherSelect sdrn
+        printTimetableFaculty(this.mainOptions.college, this.selectOptions)
+          .then(res => {
+            let blob = new Blob([res.data], { type: "application/csv" });
+            let fileUrl = window.URL.createObjectURL(blob);
+            let fileLink = document.createElement("a");
+            fileLink.href = fileUrl;
+            fileLink.setAttribute(
+              "download",
+              `time_table_faculty_${this.mainOptions.college}_${this.selectOptions.sdrn}_${this.teacherSelect}.csv`
+            );
+            document.body.appendChild(fileLink);
+            fileLink.click();
+          })
+          .catch(err => console.log(err));
+      }
     }
   }
 };

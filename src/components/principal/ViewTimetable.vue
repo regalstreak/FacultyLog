@@ -128,20 +128,22 @@ export default {
         division: this.divisions[this.tab],
         year: this.mainOptions.year,
         department: this.mainOptions.department
-      }).then(res => {
-        let blob = new Blob([res.data], { type: "application/csv" });
-        let fileUrl = window.URL.createObjectURL(blob);
-        let fileLink = document.createElement("a");
-        fileLink.href = fileUrl;
-        fileLink.setAttribute(
-          "download",
-          `time_table_${this.mainOptions.college}_${
-            this.mainOptions.department
-          }_${this.mainOptions.year}_${this.divisions[this.tab]}.csv`
-        );
-        document.body.appendChild(fileLink);
-        fileLink.click();
-      });
+      })
+        .then(res => {
+          let blob = new Blob([res.data], { type: "application/csv" });
+          let fileUrl = window.URL.createObjectURL(blob);
+          let fileLink = document.createElement("a");
+          fileLink.href = fileUrl;
+          fileLink.setAttribute(
+            "download",
+            `time_table_${this.mainOptions.college}_${
+              this.mainOptions.department
+            }_${this.mainOptions.year}_${this.divisions[this.tab]}.csv`
+          );
+          document.body.appendChild(fileLink);
+          fileLink.click();
+        })
+        .catch(err => console.log(err));
     }
   },
   watch: {
